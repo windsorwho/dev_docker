@@ -6,8 +6,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'ycm-core/YouCompleteMe'
-"Plugin 'python-mode/python-mode'
+"Plugin 'ycm-core/YouCompleteMe'
+Plugin 'python-mode/python-mode'
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
 Plugin 'google/vim-maktaba'
@@ -22,6 +22,15 @@ Plugin 'tpope/vim-fugitive'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+augroup autoformat_settings
+	autocmd FileType bzl AutoFormatBuffer buildifier
+	autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  	autocmd FileType dart AutoFormatBuffer dartfmt
+	autocmd FileType go AutoFormatBuffer gofmt
+	autocmd FileType gn AutoFormatBuffer gn
+	autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+	autocmd FileType java AutoFormatBuffer google-java-format
+	autocmd FileType python AutoFormatBuffer yapf
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
