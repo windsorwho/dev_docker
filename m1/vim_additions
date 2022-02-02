@@ -1,0 +1,39 @@
+" ----------------------------------
+" start custom
+" ----------------------------------
+" show existing tab with 4 spaces width
+set tabstop=4
+" " when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" " On pressing tab, insert 4 spaces
+set expandtab
+set nu
+" Enable folding
+set foldmethod=indent
+set foldlevel=0
+"Enable folding with the spacebar
+nnoremap <space> za
+let g:SimpylFold_docstring_preview=1
+set encoding=utf-8
+syntax enable
+" Solarized
+set background=dark
+let g:solarized_termcolors=16
+set t_Co=16
+colorscheme solarized
+call togglebg#map("<F5>")
+" Nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1 
+let g:syntastic_auto_loc_list = 0 
+let g:syntastic_check_on_open = 1 
+let g:syntastic_check_on_wq = 0 
+let g:syntastic_quiet_messages= {"!level": "errors"}
+
