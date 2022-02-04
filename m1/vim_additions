@@ -18,7 +18,7 @@ set encoding=utf-8
 syntax enable
 " Solarized
 set background=dark
-let g:solarized_termcolors=16
+let g:solarized_termcolors=256
 set t_Co=16
 colorscheme solarized
 call togglebg#map("<F5>")

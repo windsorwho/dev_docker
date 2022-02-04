@@ -48,9 +48,8 @@ ENV TERM=xterm-256color
 
 # Build and install faiss
 RUN git clone https://github.com/facebookresearch/faiss.git
-RUN apt-get install --assume-yes swig libblas-dev liblapack-dev
-RUN pip install numpy scipy=1.7.3 pytest
+RUN apt-get install --assume-yes swig libopenblas-dev 
+RUN pip install numpy scipy==1.7.3 pytest ipython tqdm scipy sklearn 
 RUN cd faiss && cmake -B build . -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DFAISS_ENABLE_GPU=OFF -DFAISS_ENABLE_PYTHON=ON -DCMAKE_BUILD_TYPE=Release && make -C build -j faiss && make -C build -j swigfaiss && cd build/faiss/python && python3 setup.py install
-ENV LD_LIBRARY_PATH=/usr/lib/aarch64-linux-gnu
-ENV PYTHON_PATH=/faiss/build/faiss/python/build/lib
-#
+#ENV LD_LIBRARY_PATH=/usr/lib/aarch64-linux-gnu
+#ENV PYTHON_PATH=/faiss/build/faiss/python/build/lib
