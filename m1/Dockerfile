@@ -24,13 +24,12 @@ RUN echo set -o vi >> /root/.bashrc && \
 # Install vundle
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 COPY vimrc /root/.vimrc
-
 # Install plugins
-
 RUN vim +PluginInstall +qall
 COPY vim_additions /root/vim_additions
 RUN cat /root/vim_additions >> /root/.vimrc
 RUN rm /root/vim_additions 
+RUN cd /root/.vim/bundle/YouCompleteMe && python3 install.py
 
 # Setup TabNine configs. Make sure the config and model are accessible.
 #COPY TabNine /root/.config/TabNine
@@ -54,3 +53,4 @@ RUN git clone https://github.com/facebookresearch/faiss.git
 RUN cd faiss && cmake -B build . -DBUILD_TESTING=ON -DBUILD_SHARED_LIBS=ON -DFAISS_ENABLE_GPU=OFF -DFAISS_ENABLE_PYTHON=ON -DCMAKE_BUILD_TYPE=Release && make -C build -j faiss && make -C build -j swigfaiss && cd build/faiss/python && python3 setup.py install
 #ENV LD_LIBRARY_PATH=/usr/lib/aarch64-linux-gnu
 #ENV PYTHON_PATH=/faiss/build/faiss/python/build/lib
+RUN pip install tensorboard

@@ -13,24 +13,21 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tmhedberg/SimpylFold'
+"Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'zxqfl/tabnine-vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'tabnine/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
 Plugin 'google/vim-glaive'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-augroup autoformat_settings
-  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType python AutoFormatBuffer yapf
-augroup END
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -42,3 +39,7 @@ augroup END
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+augroup autoformat_settings
+  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType python AutoFormatBuffer yapf
+augroup END
